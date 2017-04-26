@@ -33,9 +33,9 @@ while True:
      #sense.show_message(msg, scroll_speed=.065, back_colour=bg)
      sense.show_message(time, scroll_speed=.07, back_colour=bg)
      sleep(.01)
-     sense.show_message(temp, scroll_speed=.07, back_colour=bg)
+     sense.show_message(temp, scroll_speed=.1, back_colour=bg)
      sleep(.01)
-     sense.show_message(pres, scroll_speed=.07, back_colour=bg)
+     sense.show_message(pres, scroll_speed=.1, back_colour=bg)
      sleep(.01)
-     sense.show_message(hum, scroll_speed=.07, back_colour=bg)
+     sense.show_message(hum, scroll_speed=.1, back_colour=bg)
 
