@@ -26,6 +26,16 @@ def adjustTempForCpuTemp(temp_c):
     temp_calibrated_c = temp_c - ((cpu_temp_c - temp_c)/5.466)
     return temp_calibrated_c
 
+def tempSetBackground(temp_c):
+    if temp_c < 60:
+        return [25,25,112]
+    elif temp_c >= 60 and temp_c <= 70:
+        return [0,100,0]
+    elif temp_c > 70:
+        return [220,20,60]
+    else:
+         return [0,0,0]
+
 def convertToF(temp_c):
     return temp_c * 1.8 + 32
 
