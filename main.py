@@ -6,7 +6,7 @@ import subprocess
 from dotenv import load_dotenv
 import os
 import asyncio
-from weather import getTemp, showLetter, showMessage, convertToF, setLowLight
+from weather import getTemp, showLetter, showMessage, convertToF, setLowLight, tempSetBackground
 import threading
 
 # Load necessary modules on run
@@ -23,10 +23,11 @@ def runWeather():
     try:
         while CANCELLATION_TOKEN:
             temp_c = getTemp()
+            background_color = tempSetBackground(temp_c)
             #temp_conv = adjustTempForCpuTemp(temp_c, .05)
-            showMessage(str(round(temp_c, 1)) + " C", .05)
+            showMessage(str(round(temp_c, 1)) + " C", .05, [255,255,255], background_color)
             temp_f = convertToF(temp_c)
-            showMessage(str(round(temp_f, 1)) + " F", .05)
+            showMessage(str(round(temp_f, 1)) + " F", .05, [255,255,255], background_color)
     except:
         print("An exception occured")
 
