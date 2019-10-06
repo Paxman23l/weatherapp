@@ -33,15 +33,15 @@ def main():
     sleep(.5)
     showLetter(">", [255,128,0], [0,0,51]) #orange with dark blue
     sleep(.5)
-    showMessage("Starting WeatherPI!", .05)
+    showMessage("Starting WeatherPI!", .02)
 
     #LOAD ENV VARIABLES
     OPEN_WEATHER_APIKEY= os.environ.get("OPEN_WEATHER_APIKEY")
     MISSOULA_GPS=os.environ.get("MISSOULA_GPS")
     GUATEMALA_GPS=os.environ.get("GUATEMALA_GPS")
-    showMessage(OPEN_WEATHER_APIKEY)
-    showMessage(MISSOULA_GPS)
-    showMessage(GUATEMALA_GPS)
+    #showMessage(OPEN_WEATHER_APIKEY)
+    #showMessage(MISSOULA_GPS)
+    #showMessage(GUATEMALA_GPS)
     
     #Run weather
     # while True:
