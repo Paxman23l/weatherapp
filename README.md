@@ -1,6 +1,12 @@
 # weatherapp
 python/mssql/website application for raspberry pi
 
+# How to run
+sudo python3 main.py  
+
+# install requirements
+sudo pip3 install -r requirements.txt  
+
 # ENV Variables
 ACCOUNT_FOR_CPU_TEMP=true  
 METRIC_UNITS=true  
