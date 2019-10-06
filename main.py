@@ -33,27 +33,15 @@ def main():
     sleep(.5)
     showLetter(">", [255,128,0], [0,0,51]) #orange with dark blue
     sleep(.5)
-    #showMessage("Starting WeatherPI!", .02)
 
     #LOAD ENV VARIABLES
     OPEN_WEATHER_APIKEY= os.environ.get("OPEN_WEATHER_APIKEY")
     MISSOULA_GPS=os.environ.get("MISSOULA_GPS")
     GUATEMALA_GPS=os.environ.get("GUATEMALA_GPS")
-    #showMessage(OPEN_WEATHER_APIKEY)
-    #showMessage(MISSOULA_GPS)
-    #showMessage(GUATEMALA_GPS)
-    
-    #Run weather
-    # while True:
-    #     temp_c = getTemp()
-    #     #temp_conv = adjustTempForCpuTemp(temp_c, .05)
-    #     showMessage(round(temp_c, 1), .05)
-    #     temp_f = convertToF(temp_c)
-    #     showMessage(round(temp_f, 1), .05)
+   
     loop = asyncio.get_event_loop()
-    runWeatherTask = loop.run_in_executor(None, runWeather())
-    #input("Press Enter to continue...")
-    #asyncio.run(runWeatherTask)
+    runWeatherTask = loop.run_until_complete(runWeather(), None) #.run_in_executor
+    
     input("Press Enter to quit...")
     runWeatherTask.close()
 
