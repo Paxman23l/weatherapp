@@ -27,12 +27,12 @@ def adjustTempForCpuTemp(temp_c):
     return temp_calibrated_c
 
 def tempSetBackground(temp_c):
-    if temp_c < 60:
-        return [25,25,112]
-    elif temp_c >= 60 and temp_c <= 70:
-        return [0,100,0]
-    elif temp_c > 70:
-        return [220,20,60]
+    if temp_c < 15.5: 
+        return [0,0,51] #blue
+    elif temp_c >= 15.5 and temp_c <= 21.1:
+        return [0,128,0]
+    elif temp_c > 21.1:
+        return [255,0,0]
     else:
          return [0,0,0]
 

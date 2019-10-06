@@ -24,8 +24,6 @@ def runWeather():
         while CANCELLATION_TOKEN:
             temp_c = getTemp()
             background_color = tempSetBackground(temp_c)
-            print(background_color)
-            #temp_conv = adjustTempForCpuTemp(temp_c, .05)
             showMessage(str(round(temp_c, 1)) + " C", .05, [255,255,255], background_color)
             temp_f = convertToF(temp_c)
             showMessage(str(round(temp_f, 1)) + " F", .05, [255,255,255], background_color)
