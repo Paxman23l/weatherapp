@@ -13,11 +13,13 @@ import threading
 OPEN_WEATHER_APIKEY=""
 MISSOULA_GPS=""
 GUATEMALA_GPS=""
+CANCELLATION_TOKEN=True
 sense = SenseHat()
 load_dotenv()
 
+
 def runWeather():
-    while True:
+    while CANCELLATION_TOKEN:
         temp_c = getTemp()
         #temp_conv = adjustTempForCpuTemp(temp_c, .05)
         showMessage(round(temp_c, 1), .05)
@@ -26,6 +28,7 @@ def runWeather():
 
 def printCancellationToken():
     input("Press Enter to quit...")
+    CANCELLATION_TOKEN = False
     #pending = asyncio.Task.all_tasks()
     #for task in pending:
         #task.cancel()
@@ -55,25 +58,7 @@ def main():
     OPEN_WEATHER_APIKEY= os.environ.get("OPEN_WEATHER_APIKEY")
     MISSOULA_GPS=os.environ.get("MISSOULA_GPS")
     GUATEMALA_GPS=os.environ.get("GUATEMALA_GPS")
-   
-    #await asyncio.gather(testPrint("test1"), testPrint("test2"), testPrint("test3"))
-    #several_futures = asyncio.gather(runWeather(), printCancellationToken())
-    #loop = asyncio.get_event_loop()
-    #loop.run_until_complete(several_futures)
-    #loop.close()
-    #requests = [asyncio.ensure_future(runWeather()),
-    #            asyncio.ensure_future(printCancellationToken())]
-    #responses = loop.run_until_complete(asyncio.gather(*requests))
-    #asyncio.ensure_future(runWeather())
-    #await printCancellationToken(loop)
 
-    #loop = asyncio.get_event_loop()
-    #runWeatherTask = asyncio.async(runWeather()) #.run_in_executor
-    
-    #loop.run_forever()
-    #input("Press Enter to quit...")
-    #runWeatherTask.close()
-    
    # Working
     t1 = threading.Thread(target=runWeather)
     t2 = threading.Thread(target=printCancellationToken)
@@ -82,8 +67,6 @@ def main():
     t2.start()
 
     t1.join()
-    #while True:
-    #    print("running")
     
 if __name__ == "__main__":
     main()
