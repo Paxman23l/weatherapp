@@ -5,11 +5,8 @@ import time
 import subprocess
 from dotenv import load_dotenv
 import os
+import asyncio
 
-# Load necessary modules on run
-OPEN_WEATHER_APIKEY=""
-MISSOULA_GPS=""
-GUATEMALA_GPS=""
 sense = SenseHat()
 load_dotenv()
 
@@ -64,36 +61,3 @@ def showLetter(letter,text_colour=[255,0,0],back_colour=[0,0,0]):
 def setLowLight(setting=True):
     sense.low_light=setting
     return
-
-
-def main():
-    setLowLight()
-    showLetter("<", [0,0,204], [255,255,255]) #blue with white
-    sleep(.5)
-    showLetter(">", [0,255,0], [160,160,160]) #green with grey
-    sleep(.5)
-    showLetter("<", [255,255,0], [32,32,32]) #yellow with black
-    sleep(.5)
-    showLetter(">", [255,128,0], [0,0,51]) #orange with dark blue
-    sleep(.5)
-    showMessage("Starting WeatherPI!", .05)
-
-    #LOAD ENV VARIABLES
-    OPEN_WEATHER_APIKEY= os.environ.get("OPEN_WEATHER_APIKEY")
-    MISSOULA_GPS=os.environ.get("MISSOULA_GPS")
-    GUATEMALA_GPS=os.environ.get("GUATEMALA_GPS")
-    showMessage(OPEN_WEATHER_APIKEY)
-    showMessage(MISSOULA_GPS)
-    showMessage(GUATEMALA_GPS)
-    
-    #Run weather
-    while True:
-        temp_c = getTemp()
-        #temp_conv = adjustTempForCpuTemp(temp_c, .05)
-        showMessage(round(temp_c, 1), .05)
-        temp_f = convertToF(temp_c)
-        showMessage(round(temp_f, 1), .05)
-
-    
-if __name__ == "__main__":
-    main()
