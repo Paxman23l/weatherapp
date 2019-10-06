@@ -19,6 +19,7 @@ load_dotenv()
 
 
 def runWeather():
+    print("First Thread")
     while CANCELLATION_TOKEN:
         temp_c = getTemp()
         #temp_conv = adjustTempForCpuTemp(temp_c, .05)
@@ -27,8 +28,9 @@ def runWeather():
         showMessage(round(temp_f, 1), .05)
 
 def printCancellationToken():
-    input("Press Enter to quit...")
-    CANCELLATION_TOKEN = False
+    print("Second Thread")
+    # input("Press Enter to quit...")
+    # CANCELLATION_TOKEN = False
     #pending = asyncio.Task.all_tasks()
     #for task in pending:
         #task.cancel()
