@@ -50,8 +50,9 @@ def main():
     #     showMessage(round(temp_c, 1), .05)
     #     temp_f = convertToF(temp_c)
     #     showMessage(round(temp_f, 1), .05)
-
-    raw_input("Press Enter to continue...")
+    runWeatherTask = runWeather()
+    input("Press Enter to continue...")
+    runWeatherTask.close()
 
     
 if __name__ == "__main__":
