@@ -85,7 +85,8 @@ def main():
     showMessage(OPEN_WEATHER_APIKEY)
     showMessage(MISSOULA_GPS)
     showMessage(GUATEMALA_GPS)
-    #showMessage("Hello Daniela!!!", .05)
+    
+    #Run weather
     while True:
         temp_c = getTemp()
         #temp_conv = adjustTempForCpuTemp(temp_c, .05)
