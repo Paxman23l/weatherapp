@@ -4,11 +4,12 @@ import datetime
 import time
 import subprocess
 from dotenv import load_dotenv
+import os
 
 # Load necessary modules on run
-openWeatherAPIKey=""
-missoulaGPS=[46.877106,-114.004434]
-guaGPS=[14.614377,-90.469710]
+OPEN_WEATHER_APIKEY=""
+MISSOULA_GPS=""
+GUATEMALA_GPS=""
 sense = SenseHat()
 load_dotenv()
 
@@ -76,6 +77,14 @@ def main():
     showLetter(">", [255,128,0], [0,0,51]) #orange with dark blue
     sleep(.5)
     showMessage("Starting WeatherPI!", .05)
+
+    #LOAD ENV VARIABLES
+    OPEN_WEATHER_APIKEY= os.environ.get("OPEN_WEATHER_APIKEY")
+    MISSOULA_GPS=os.environ.get("MISSOULA_GPS")
+    GUATEMALA_GPS=os.environ.get("GUATEMALA_GPS")
+    showMessage(OPEN_WEATHER_APIKEY)
+    showMessage(MISSOULA_GPS)
+    showMessage(GUATEMALA_GPS)
     #showMessage("Hello Daniela!!!", .05)
     while True:
         temp_c = getTemp()
