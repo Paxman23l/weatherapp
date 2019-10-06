@@ -21,5 +21,8 @@ sudo rm -r Python-3.7.4
 rm Python-3.7.4.tar.xz
 . ~/.bashrc
 python -V
+# Ensure all requirements are installed
+sudo apt-get install libglib2.0-dev
+sense-hat python-numpy python-scipy python-matplotlib ipython python-pandas python-sympy python-nose
 
 

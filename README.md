@@ -1,15 +1,18 @@
 # weatherapp
 SenseHat application for raspberry pi
 
-# Install Python 3.7.4
+<!-- # Install Python 3.7.4
 sudo chmod +x setup.sh
-sudo ./setup.sh
+sudo ./setup.sh -->
+
+# update pip3.7
+sudo pip3 install --upgrade pip
 
 # install requirements
-sudo pip3.7 install -r requirements.txt  
+sudo pip3 install -r requirements.txt  
 
 # How to run
-sudo python3.7 main.py  
+sudo python3 main.py  
 
 # ENV Variables
 ACCOUNT_FOR_CPU_TEMP=true  
