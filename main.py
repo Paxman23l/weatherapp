@@ -20,12 +20,15 @@ load_dotenv()
 
 def runWeather():
     print("First Thread")
-    while CANCELLATION_TOKEN:
-        temp_c = getTemp()
-        #temp_conv = adjustTempForCpuTemp(temp_c, .05)
-        showMessage(round(temp_c, 1), .05)
-        temp_f = convertToF(temp_c)
-        showMessage(round(temp_f, 1), .05)
+    try:
+        while CANCELLATION_TOKEN:
+            temp_c = getTemp()
+            #temp_conv = adjustTempForCpuTemp(temp_c, .05)
+            showMessage(str(round(temp_c, 1)) + " C", .05)
+            temp_f = convertToF(temp_c)
+            showMessage(str(round(temp_f, 1)) + " F", .05)
+    except:
+        print("An exception occured")
 
 def printCancellationToken():
     print("Second Thread")
