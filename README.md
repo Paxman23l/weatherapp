@@ -1,11 +1,15 @@
 # weatherapp
-python/mssql/website application for raspberry pi
+SenseHat application for raspberry pi
 
-# How to run
-sudo python3 main.py  
+# Install Python 3.7.4
+sudo chmod +x setup.sh
+sudo ./setup.sh
 
 # install requirements
-sudo pip3 install -r requirements.txt  
+sudo pip3.7 install -r requirements.txt  
+
+# How to run
+sudo python3.7 main.py  
 
 # ENV Variables
 ACCOUNT_FOR_CPU_TEMP=true  
