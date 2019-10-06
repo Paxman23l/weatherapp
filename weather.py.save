@@ -6,9 +6,6 @@ import subprocess
 from dotenv import load_dotenv
 
 # Load necessary modules on run
-openWeatherAPIKey=""
-missoulaGPS=[46.877106,-114.004434]
-guaGPS=[14.614377,-90.469710]
 sense = SenseHat()
 load_dotenv()
 
@@ -16,20 +13,18 @@ def getTemp():
     return sense.get_temperature()
 
 def getCPUTemp():
-    cpu_temp = subprocess.check_output("vcgencmd measure_temp", shell=True)
     array = cpu_temp.split("=")
     array2 = array[1].split("'")
-    return float(array2[0])
+    array = cpu_temp.split("=")
+    array2 = array[1].split("'")
+    return subprocess.check_output("vcgencmd measure_temp", shell=True)
 
 def adjustTempForCpuTemp(temp_c):
     cpu_temp_c = getCPUTemp()
-    #print(temp_c)
-    #print(cpu_temp_c)
+    print(temp_c)
+    print(cpu_temp_c)
     temp_calibrated_c = temp_c - ((cpu_temp_c - temp_c)/5.466)
     return temp_calibrated_c
-
-def convertToF(temp_c):
-    return temp_c * 1.8 + 32
 
 def getHumidity():
     return sense.get_humidity()
@@ -56,33 +51,17 @@ def showMessage(message, scroll_speed=.06, text_colour=[255, 0, 0], back_colour=
     message="{0}".format(message)
     return sense.show_message(message, scroll_speed=scroll_speed, text_colour=text_colour, back_colour=back_colour)
 
-def showLetter(letter,text_colour=[255,0,0],back_colour=[0,0,0]):
-    sense.show_letter(letter, text_colour=text_colour, back_colour=back_colour)
-    return
-
-def setLowLight(setting=True):
+def setLowlight(setting=True):
     sense.low_light=setting
     return
 
 
 def main():
-    setLowLight()
-    showLetter("<", [0,0,204], [255,255,255]) #blue with white
-    sleep(.5)
-    showLetter(">", [0,255,0], [160,160,160]) #green with grey
-    sleep(.5)
-    showLetter("<", [255,255,0], [32,32,32]) #yellow with black
-    sleep(.5)
-    showLetter(">", [255,128,0], [0,0,51]) #orange with dark blue
-    sleep(.5)
-    showMessage("Starting WeatherPI!", .05)
-    #showMessage("Hello Daniela!!!", .05)
+    showMessage("Starting WeatherPI!", .1)
     while True:
         temp_c = getTemp()
-        #temp_conv = adjustTempForCpuTemp(temp_c, .05)
-        showMessage(round(temp_c, 1), .05)
-        temp_f = convertToF(temp_c)
-        showMessage(round(temp_f, 1), .05)
+        temp_conv = adjustTempForCpuTemp(temp_c)
+        showMessage(temp_conv)
 
     
 if __name__ == "__main__":
