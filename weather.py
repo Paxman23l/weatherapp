@@ -13,10 +13,15 @@ def getTemp():
     return sense.get_temperature()
 
 def getCPUTemp():
-    return subprocess.check_output("vcgencmd measure_temp", shell=True)
+    cpu_temp = subprocess.check_output("vcgencmd measure_temp", shell=True)
+    array = cpu_temp.split("=")
+    array2 = array[1].split("'")
+    return float(array2[0])
 
 def adjustTempForCpuTemp(temp_c):
     cpu_temp_c = getCPUTemp()
+    #print(temp_c)
+    #print(cpu_temp_c)
     temp_calibrated_c = temp_c - ((cpu_temp_c - temp_c)/5.466)
     return temp_calibrated_c
 
@@ -42,6 +47,7 @@ def getAccelerometer():
     return sense.get_accelerometer()
 
 def showMessage(message, scroll_speed=.06, text_colour=[255, 0, 0], back_colour=[0, 0, 0]):
+    message="{0}".format(message)
     return sense.show_message(message, scroll_speed=scroll_speed, text_colour=text_colour, back_colour=back_colour)
 
 def setLowlight(setting=True):
@@ -50,7 +56,7 @@ def setLowlight(setting=True):
 
 
 def main():
-    showMessage("Starting WeatherPI!")
+    showMessage("Starting WeatherPI!", .1)
     while True:
         temp_c = getTemp()
         temp_conv = adjustTempForCpuTemp(temp_c)
