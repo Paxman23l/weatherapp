@@ -23,7 +23,7 @@ def runInsideWeather(q):
     print("Getting weather")
     
     while True:
-        if len(q) < 10:
+        if q.full() != True:
             try:
                 temp_c = getTemp()
                 background_color = tempSetBackground(temp_c)
@@ -70,7 +70,7 @@ def main():
     GUATEMALA_GPS=os.environ.get("GUATEMALA_GPS")
 
     # Set working Object
-    weatherData = Queue()
+    weatherData = Queue(10)
     # Working
     t1 = threading.Thread(target=runInsideWeather, args=(weatherData,))
     t2 = threading.Thread(target=runOutsideWeather, args=(weatherData,))
