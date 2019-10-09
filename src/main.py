@@ -28,11 +28,11 @@ def runInsideWeather(q):
             background_color = tempSetBackground(temp_c)
             if os.environ.get('METRIC_UNITS'):
                 #WeatherModelDisplay(temp_c, TempFormat.C, .05, [255,255,255], background_color, "Inside Temp")                
-                q.put(DisplayModel("Inside temp is: " + str(temp_c) + " " + TempFormat.C.name, .05, [255,255,255], background_color))    
+                q.put(DisplayModel("Inside: " + str(round(temp_c, 1)) + " " + TempFormat.C.name, .05, [255,255,255], background_color))    
             if os.environ.get('IMPERIAL_UNITS'):
                 temp_f = convertToF(temp_c)
                 #queue.put(WeatherModelDisplay(temp_f, TempFormat.F, .05, [255,255,255], background_color, "Inside Temp"))
-                q.put(DisplayModel("Inside temp is: " + str(temp_f) + " " + TempFormat.F.name, .05, [255,255,255], background_color))    
+                q.put(DisplayModel("Inside: " + str(round(temp_f, 1)) + " " + TempFormat.F.name, .05, [255,255,255], background_color))    
         except Exception as e:
             print("An exception occured")
             print(e)
@@ -70,7 +70,7 @@ def main():
 
     # Set working Object
     weatherData = Queue()
-   # Working
+    # Working
     t1 = threading.Thread(target=runInsideWeather, args=(weatherData,))
     t2 = threading.Thread(target=runOutsideWeather, args=(weatherData,))
     t3 = threading.Thread(target=printMessages, args=(weatherData,))
