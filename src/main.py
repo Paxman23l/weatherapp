@@ -37,7 +37,7 @@ def runInsideWeather(q):
             print("An exception occured")
             print(e)
             
-        sleep(5)
+        sleep(10)
     
 
 def runOutsideWeather(queue):
