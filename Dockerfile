@@ -25,4 +25,4 @@ RUN apt-get remove -y git wget python3-pip && apt-get remove --purge x11-common 
 # COPY PROGRAM FILES
 COPY src/ /src/
 
-CMD ["python3.5", ".src/main.py"]
+CMD ["python3.5", "/src/main.py"]
