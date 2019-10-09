@@ -19,7 +19,7 @@ sense = SenseHat()
 load_dotenv()
 
 
-def runInsideWeather(queue):
+def runInsideWeather(q):
     print("Getting weather")
     try:
         while True:
@@ -28,12 +28,12 @@ def runInsideWeather(queue):
 
             if os.environ.get('METRIC_UNITS'):
                 #WeatherModelDisplay(temp_c, TempFormat.C, .05, [255,255,255], background_color, "Inside Temp")                
-                queue.put(DisplayModel("Inside temp is: " + temp_c + " " + TempFormat.C, .05, [255,255,255], background_color))    
+                q.put(DisplayModel("Inside temp is: " + temp_c + " " + TempFormat.C, .05, [255,255,255], background_color))    
 
             if os.environ.get('IMPERIAL_UNITS'):
                 temp_f = convertToF(temp_c)
                 #queue.put(WeatherModelDisplay(temp_f, TempFormat.F, .05, [255,255,255], background_color, "Inside Temp"))
-                queue.put(DisplayModel("Inside temp is: " + temp_f + " " + TempFormat.F, .05, [255,255,255], background_color))    
+                q.put(DisplayModel("Inside temp is: " + temp_f + " " + TempFormat.F, .05, [255,255,255], background_color))    
 
             sleep(5)
     except:
