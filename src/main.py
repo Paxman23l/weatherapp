@@ -70,9 +70,9 @@ def main():
     # Set working Object
     weatherData = Queue()
    # Working
-    t1 = threading.Thread(target=runInsideWeather, args=(weatherData))
-    t2 = threading.Thread(target=runOutsideWeather, args=(weatherData))
-    t3 = threading.Thread(target=printMessages, args=(weatherData))
+    t1 = threading.Thread(target=runInsideWeather, args=(weatherData,))
+    t2 = threading.Thread(target=runOutsideWeather, args=(weatherData,))
+    t3 = threading.Thread(target=printMessages, args=(weatherData,))
     t1.start()
     t2.start()
     t3.start()
