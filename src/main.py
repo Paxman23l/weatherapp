@@ -36,7 +36,7 @@ def runInsideWeather(q):
                 q.put(DisplayModel("Inside temp is: " + temp_f + " " + TempFormat.F, .05, [255,255,255], background_color))    
 
             sleep(5)
-    except Exception, e:
+    except Exception as e:
         print("An exception occured")
         print(e)
         runInsideWeather(q)
