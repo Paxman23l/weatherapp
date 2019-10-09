@@ -21,25 +21,24 @@ load_dotenv()
 
 def runInsideWeather(q):
     print("Getting weather")
-    try:
-        while True:
+    
+    while True:
+        try:
             temp_c = getTemp()
             background_color = tempSetBackground(temp_c)
-
             if os.environ.get('METRIC_UNITS'):
                 #WeatherModelDisplay(temp_c, TempFormat.C, .05, [255,255,255], background_color, "Inside Temp")                
-                q.put(DisplayModel("Inside temp is: " + temp_c + " " + TempFormat.C, .05, [255,255,255], background_color))    
-
+                q.put(DisplayModel("Inside temp is: " + str(temp_c) + " " + TempFormat.C, .05, [255,255,255], background_color))    
             if os.environ.get('IMPERIAL_UNITS'):
                 temp_f = convertToF(temp_c)
                 #queue.put(WeatherModelDisplay(temp_f, TempFormat.F, .05, [255,255,255], background_color, "Inside Temp"))
-                q.put(DisplayModel("Inside temp is: " + temp_f + " " + TempFormat.F, .05, [255,255,255], background_color))    
-
-            sleep(5)
-    except Exception as e:
-        print("An exception occured")
-        print(e)
-        runInsideWeather(q)
+                q.put(DisplayModel("Inside temp is: " + str(temp_f) + " " + TempFormat.F, .05, [255,255,255], background_color))    
+        except Exception as e:
+            print("An exception occured")
+            print(e)
+            
+        sleep(5)
+    
 
 def runOutsideWeather(queue):
     pass
