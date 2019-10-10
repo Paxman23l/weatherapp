@@ -22,12 +22,13 @@ def addParameters(url):
     apiKey = os.environ.get("OPEN_WEATHER_APIKEY")
     i = 0
     for item in cityCodes:
-        if i == len(cityCodes):
+        if i == (len(cityCodes) - 1):
             url = url + item
         elif len(cityCodes) == 1:
             url = url + item
         else:
             url = url + item + ","
+        i = i + 1
             
     if len(cityCodes) > 0:
         url + "&APPID=" + apiKey
