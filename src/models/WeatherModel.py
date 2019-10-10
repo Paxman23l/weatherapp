@@ -1,5 +1,5 @@
 from abc import abstractproperty, abstractmethod
-from BaseClass import BaseClass
+from models.BaseClass import BaseClass
 
 class WeatherModel(BaseClass):
     def __init__(self, temperature, tempFormat):
