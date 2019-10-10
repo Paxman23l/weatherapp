@@ -1,5 +1,11 @@
 from abc import abstractproperty, abstractmethod
-from BaseClass import BaseClass
+
+class BaseClass():
+    def __init__(self):
+        pass
+    @abstractmethod
+    def display(self):
+        pass
 
 class WeatherModel(BaseClass):
     def __init__(self, temperature, tempFormat):
