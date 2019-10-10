@@ -33,4 +33,5 @@ def addParameters(url):
         url + "&APPID=" + apiKey
     else:
         url + "APPID=" + apiKey
+    print(url)
     return url
