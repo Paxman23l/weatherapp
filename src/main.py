@@ -51,7 +51,8 @@ def runOutsideWeather(q):
         if q.full() != True:
             try:
                 result = openWeatherApiCall()
-                q.put(DisplayModel(result, .05, [255,255,255], [0,0,0]))
+                for item in result:
+                    q.put(DisplayModel(item, .05, [255,255,255], [0,0,0]))
             except Exception as e:
                 print("An exception occured")
                 print(e)

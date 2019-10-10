@@ -6,7 +6,7 @@ def formatResponse(data):
     print(data)
     return "Hi from openweatherapi"
 
-def openWeatherApiCall():
+def openWeatherApiCall(q):
     try:
         url = os.environ.get("OPEN_WEATHER_URL")
         apiKey = os.environ.get("OPEN_WEATHER_APIKEY")
@@ -21,10 +21,13 @@ def openWeatherApiCall():
         result = requests.get(url, params=PARAMS)
     
         if result.status_code == 200:
-            print(json.loads(result.content))
-            return formatResponse(result.content)
+            msg = []
+            jsonResult = json.loads(result.content)
+            for item in jsonResult["list"]:
+                msg.append(item.name + ": " + item.main.temp + "C")
+            return msg
         else:
-            return ""
+            return []
     except Exception as e:
         print(e)
 
