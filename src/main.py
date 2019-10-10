@@ -13,6 +13,7 @@ from models.WeatherModel import WeatherModel, WeatherModelDisplay
 from models.DisplayModel import DisplayModel
 from controllers.openweatherapi import openWeatherApiCall
 from models.Enums import TempFormat
+
 # Load necessary modules on run
 OPEN_WEATHER_APIKEY=""
 MISSOULA_GPS=""
@@ -20,7 +21,6 @@ GUATEMALA_GPS=""
 CANCELLATION_TOKEN=True
 sense = SenseHat()
 load_dotenv()
-
 
 def runInsideWeather(q):
     print("Getting weather")
