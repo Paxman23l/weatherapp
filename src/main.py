@@ -56,7 +56,7 @@ def runOutsideWeather(q):
             except Exception as e:
                 print("An exception occured")
                 print(e)
-        sleep(500)
+        sleep(10)
 
 def printMessages(queue):
     while True:
