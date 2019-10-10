@@ -6,12 +6,12 @@ import subprocess
 from dotenv import load_dotenv
 import os
 import asyncio
-from weather import getTemp, showLetter, showMessage, convertToF, setLowLight, tempSetBackground
+from controllers.weather import getTemp, showLetter, showMessage, convertToF, setLowLight, tempSetBackground
 import threading
 from queue import Queue
 from models.WeatherModel import WeatherModel, WeatherModelDisplay
 from models.DisplayModel import DisplayModel
-from openweatherapi import openWeatherApiCall
+# from controllers.openweatherapi import openWeatherApiCall
 from models.Enums import TempFormat
 
 # Load necessary modules on run
@@ -44,15 +44,15 @@ def runInsideWeather(q):
         sleep(10)
     
 
-def runOutsideWeather(q):
-    while True:
-        if q.full() != True:
-            try:
-                result = openWeatherApiCall()
-                q.put(DisplayModel(result, .05, [255,255,255], [0,0,0]))
-            except Exception as e:
-                print("An exception occured")
-                print(e)
+# def runOutsideWeather(q):
+#     while True:
+#         if q.full() != True:
+#             try:
+#                 result = openWeatherApiCall()
+#                 q.put(DisplayModel(result, .05, [255,255,255], [0,0,0]))
+#             except Exception as e:
+#                 print("An exception occured")
+#                 print(e)
 
 def printMessages(queue):
     while True:
@@ -77,7 +77,7 @@ def main():
     # Set working Object
     weatherData = Queue(10)
     t1 = threading.Thread(target=runInsideWeather, args=(weatherData,))
-    t2 = threading.Thread(target=runOutsideWeather, args=(weatherData,))
+    # t2 = threading.Thread(target=runOutsideWeather, args=(weatherData,))
     t3 = threading.Thread(target=printMessages, args=(weatherData,))
     t1.start()
     t2.start()
