@@ -11,7 +11,7 @@ import threading
 from queue import Queue
 from models.WeatherModel import WeatherModel, WeatherModelDisplay
 from models.DisplayModel import DisplayModel
-from openweatherapi import openWeatherApiCall
+from controllers.openweatherapi import openWeatherApiCall
 from models.Enums import TempFormat
 import sys
 

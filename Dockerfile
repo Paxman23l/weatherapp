@@ -22,6 +22,8 @@ WORKDIR /
 RUN rm -r RTIMULib/ && rm requirements.txt
 RUN apt-get remove -y git wget python3-pip && apt-get remove --purge x11-common && apt-get -y autoremove && apt-get -y autoclean
 
+RUN pip3 install requests
+
 # COPY PROGRAM FILES
 COPY src/ /src/
 
