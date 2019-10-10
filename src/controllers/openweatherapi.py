@@ -8,32 +8,38 @@ def formatResponse(data):
 
 def openWeatherApiCall():
     url = os.environ.get("OPEN_WEATHER_URL")
-    
-    url = addParameters(url)
-    result = requests.get(url)
-    return formatResponse(result)
-
-def addParameters(url):
+    apiKey = os.environ.get("OPEN_WEATHER_APIKEY")
     cityCodes = []
     with open("/src/cities.json", 'r') as f:
         cityCodes = json.load(f)["cities"]
         f.close()
-    # cityCodes = os.environ.get("CITIES")
-    apiKey = os.environ.get("OPEN_WEATHER_APIKEY")
-    i = 0
-    for item in cityCodes:
-        item = str(item)
-        if i == (len(cityCodes) - 1):
-            url = url + item
-        elif len(cityCodes) == 1:
-            url = url + item
-        else:
-            url = url + item + ","
-        i = i + 1
+    
+    # url = addParameters(url)
+    PARAMS = {'id': cityCodes, 'APPID': apiKey}
+    result = requests.get(url, params=PARAMS)
+    return formatResponse(result)
+
+# def addParameters(url):
+#     # cityCodes = []
+#     # with open("/src/cities.json", 'r') as f:
+#     #     cityCodes = json.load(f)["cities"]
+#     #     f.close()
+#     # cityCodes = os.environ.get("CITIES")
+#     # apiKey = os.environ.get("OPEN_WEATHER_APIKEY")
+#     i = 0
+#     # for item in cityCodes:
+#     #     item = 'item'
+#     #     if i == (len(cityCodes) - 1):
+#     #         url = url + item
+#     #     elif len(cityCodes) == 1:
+#     #         url = url + item
+#     #     else:
+#     #         url = url + item + ','
+#     #     i = i + 1
             
-    if len(cityCodes) > 0:
-        url + "&APPID=" + apiKey
-    else:
-        url + "APPID=" + apiKey
-    print(url)
-    return url
+#     if len(cityCodes) > 0:
+#         url + "&APPID=" + apiKey
+#     else:
+#         url + "APPID=" + apiKey
+#     print(url)
+#     return url
