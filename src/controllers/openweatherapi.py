@@ -2,7 +2,7 @@ import requests
 import os
 import json
 from . weather import tempSetBackground
-from ..models.DisplayModel import DisplayModel
+from models.DisplayModel import DisplayModel
 
 def formatResponse(data):
     print(data)
