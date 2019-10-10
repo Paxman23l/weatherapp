@@ -27,7 +27,8 @@ def openWeatherApiCall():
             jsonResult = json.loads(result.content.decode('utf-8'))
             for item in jsonResult['list']:
                 background = tempSetBackground(item['main']['temp'])
-                model = DisplayModel(item['name'] + ": " + str(item['main']['temp']) + "C", .05, [255,255,255],background)
+                print(item['name'] + ": " + str(round(item['main']['temp'], 1)) + "C")
+                model = DisplayModel(item['name'] + ": " + str(round(item['main']['temp'], 1)) + "C", .05, [255,255,255],background)
                 # msg.append(item['name'] + ": " + str(item['main']['temp']) + "C")
                 msg.append(model)
             return msg
