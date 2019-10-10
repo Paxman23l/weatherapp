@@ -16,7 +16,7 @@ def openWeatherApiCall():
             f.close()
     
         # url = addParameters(url)
-        PARAMS = {'id': cityCodes, 'APPID': apiKey}
+        PARAMS = {'id': cityCodes, 'APPID': apiKey, 'units': 'metric'}
         print(PARAMS)
         result = requests.get(url, params=PARAMS)
     
