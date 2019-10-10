@@ -20,8 +20,11 @@ def openWeatherApiCall():
         print(PARAMS)
         result = requests.get(url, params=PARAMS)
     
-        print(json.loads(result))
-        return formatResponse(result)
+        if result.status_code == 200:
+            print(json.loads(result.content))
+            return formatResponse(result.content)
+        else:
+            return ""
     except Exception as e:
         print(e)
 
