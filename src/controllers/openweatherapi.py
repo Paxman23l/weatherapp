@@ -1,5 +1,6 @@
 import requests
 import os
+import json
 
 def formatResponse(data):
     print(data)
@@ -13,7 +14,11 @@ def openWeatherApiCall():
     return formatResponse(result)
 
 def addParameters(url):
-    cityCodes = os.environ.get("CITIES")
+    cityCodes = []
+    with open("../cities.json", 'r') as f:
+        cityCodes = json.load(f)["cities"]
+        f.close()
+    # cityCodes = os.environ.get("CITIES")
     apiKey = os.environ.get("OPEN_WEATHER_APIKEY")
     i = 0
     for item in cityCodes:
