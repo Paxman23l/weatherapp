@@ -20,7 +20,7 @@ def openWeatherApiCall():
         print(PARAMS)
         result = requests.get(url, params=PARAMS)
     
-        print(json.dumps(result))
+        print(json.loads(result))
         return formatResponse(result)
     except Exception as e:
         print(e)
