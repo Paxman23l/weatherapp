@@ -1,6 +1,8 @@
 import requests
 import os
 import json
+from weather import tempSetBackground
+from DisplayModel import DisplayModel
 
 def formatResponse(data):
     print(data)
@@ -23,10 +25,11 @@ def openWeatherApiCall():
         if result.status_code == 200:
             msg = []
             jsonResult = json.loads(result.content.decode('utf-8'))
-            print(jsonResult)
-            print(jsonResult['list'])
             for item in jsonResult['list']:
-                msg.append(item['name'] + ": " + str(item['main']['temp']) + "C")
+                background = tempSetBackground(item['main']['temp'])
+                model = DisplayModel(item['name'] + ": " + str(item['main']['temp']) + "C", .05, [255,255,255],background)
+                # msg.append(item['name'] + ": " + str(item['main']['temp']) + "C")
+                msg.append(model)
             return msg
         else:
             return []
