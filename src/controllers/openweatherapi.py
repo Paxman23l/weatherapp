@@ -7,19 +7,23 @@ def formatResponse(data):
     return "Hi from openweatherapi"
 
 def openWeatherApiCall():
-    url = os.environ.get("OPEN_WEATHER_URL")
-    apiKey = os.environ.get("OPEN_WEATHER_APIKEY")
-    cityCodes = []
-    with open("/src/cities.json", 'r') as f:
-        cityCodes = json.load(f)["cities"]
-        f.close()
+    try:
+        url = os.environ.get("OPEN_WEATHER_URL")
+        apiKey = os.environ.get("OPEN_WEATHER_APIKEY")
+        cityCodes = []
+        with open("/src/cities.json", 'r') as f:
+            cityCodes = json.load(f)["cities"]
+            f.close()
     
-    # url = addParameters(url)
-    PARAMS = {'id': cityCodes, 'APPID': apiKey}
-    print(PARAMS)
-    result = requests.get(url, params=PARAMS)
-    print(json.dumps(result))
-    return formatResponse(result)
+        # url = addParameters(url)
+        PARAMS = {'id': cityCodes, 'APPID': apiKey}
+        print(PARAMS)
+        result = requests.get(url, params=PARAMS)
+    
+        print(json.dumps(result))
+        return formatResponse(result)
+    except Exception as e:
+        print(e)
 
 # def addParameters(url):
 #     # cityCodes = []
