@@ -15,7 +15,7 @@ def openWeatherApiCall():
 
 def addParameters(url):
     cityCodes = []
-    with open("../cities.json", 'r') as f:
+    with open("/src/cities.json", 'r') as f:
         cityCodes = json.load(f)["cities"]
         f.close()
     # cityCodes = os.environ.get("CITIES")
