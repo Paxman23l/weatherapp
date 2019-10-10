@@ -13,8 +13,10 @@ from models.WeatherModel import WeatherModel, WeatherModelDisplay
 from models.DisplayModel import DisplayModel
 from controllers.openweatherapi import openWeatherApiCall
 from models.Enums import TempFormat
+import sys
 
 # Load necessary modules on run
+sys.path.insert(1, '.')
 OPEN_WEATHER_APIKEY=""
 MISSOULA_GPS=""
 GUATEMALA_GPS=""

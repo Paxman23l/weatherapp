@@ -1,5 +1,5 @@
-from .. import requests
-from .. import os
+import requests
+import os
 
 def formatResponse(data):
     print(data)
