@@ -6,10 +6,13 @@ import subprocess
 from dotenv import load_dotenv
 import os
 import asyncio
-from weather import getTemp, showLetter, showMessage, convertToF, setLowLight, tempSetBackground
+from controllers.weather import getTemp, showLetter, showMessage, convertToF, setLowLight, tempSetBackground
 import threading
 from queue import Queue
-from classes.WeatherModel import WeatherModelDisplay, TempFormat, DisplayModel
+from models.WeatherModel import WeatherModel, WeatherModelDisplay
+from models.DisplayModel import DisplayModel
+from controllers.openweatherapi import openWeatherApiCall
+from models.Enums import TempFormat
 # Load necessary modules on run
 OPEN_WEATHER_APIKEY=""
 MISSOULA_GPS=""
@@ -41,8 +44,15 @@ def runInsideWeather(q):
         sleep(10)
     
 
-def runOutsideWeather(queue):
-    pass
+def runOutsideWeather(q):
+    while True:
+        if q.full() != True:
+            try:
+                result = openWeatherApiCall()
+                q.put(DisplayModel(result, .05, [255,255,255], [0,0,0]))
+            except Exception as e:
+                print("An exception occured")
+                print(e)
 
 def printMessages(queue):
     while True:
@@ -64,14 +74,8 @@ def main():
     showLetter(">", [255,128,0], [0,0,51]) #orange with dark blue
     sleep(.5)
 
-    #LOAD ENV VARIABLES
-    OPEN_WEATHER_APIKEY= os.environ.get("OPEN_WEATHER_APIKEY")
-    MISSOULA_GPS=os.environ.get("MISSOULA_GPS")
-    GUATEMALA_GPS=os.environ.get("GUATEMALA_GPS")
-
     # Set working Object
     weatherData = Queue(10)
-    # Working
     t1 = threading.Thread(target=runInsideWeather, args=(weatherData,))
     t2 = threading.Thread(target=runOutsideWeather, args=(weatherData,))
     t3 = threading.Thread(target=printMessages, args=(weatherData,))
@@ -84,7 +88,3 @@ def main():
     
 if __name__ == "__main__":
     main()
-    #loop = asyncio.get_event_loop()
-    #loop.run_until_complete(main())
-    #loop = asyncio.get_event_loop()    
-    #loop.run_until_complete(main(loop))

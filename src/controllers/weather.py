@@ -21,8 +21,6 @@ def getCPUTemp():
 
 def adjustTempForCpuTemp(temp_c):
     cpu_temp_c = getCPUTemp()
-    #print(temp_c)
-    #print(cpu_temp_c)
     temp_calibrated_c = temp_c - ((cpu_temp_c - temp_c)/5.466)
     return temp_calibrated_c
 
