@@ -6,12 +6,12 @@ import subprocess
 from dotenv import load_dotenv
 import os
 import asyncio
-from controllers.weather import getTemp, showLetter, showMessage, convertToF, setLowLight, tempSetBackground
+from weather import getTemp, showLetter, showMessage, convertToF, setLowLight, tempSetBackground
 import threading
 from queue import Queue
 from models.WeatherModel import WeatherModel, WeatherModelDisplay
 from models.DisplayModel import DisplayModel
-from controllers.openweatherapi import openWeatherApiCall
+from openweatherapi import openWeatherApiCall
 from models.Enums import TempFormat
 
 # Load necessary modules on run
