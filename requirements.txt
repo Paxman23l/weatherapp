@@ -3,5 +3,4 @@ numpy
 sense_hat
 python-dotenv
 Pillow
-CouchDB
-asyncio
+cloudant

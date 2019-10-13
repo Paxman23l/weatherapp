@@ -3,12 +3,14 @@ import os
 import json
 from . weather import tempSetBackground
 from models.DisplayModel import DisplayModel
+from services.couchdb import addExternalWeather
+import datetime
 
 def formatResponse(data):
     print(data)
     return "Hi from openweatherapi"
 
-def openWeatherApiCall():
+def openWeatherApiCall(ENABLE_STORAGE):
     try:
         url = os.environ.get("OPEN_WEATHER_URL")
         apiKey = os.environ.get("OPEN_WEATHER_APIKEY")
@@ -29,35 +31,11 @@ def openWeatherApiCall():
                 background = tempSetBackground(item['main']['temp'])
                 print(item['name'] + ": " + str(round(item['main']['temp'], 1)) + "C")
                 model = DisplayModel(item['name'] + ": " + str(round(item['main']['temp'], 1)) + "C", .05, [255,255,255],background)
-                # msg.append(item['name'] + ": " + str(item['main']['temp']) + "C")
                 msg.append(model)
+                if ENABLE_STORAGE:
+                        addExternalWeather(datetime.datetime.now(), item['name'], str(round(item['main']['temp'], 1)))
             return msg
         else:
             return []
     except Exception as e:
         print(e)
-
-# def addParameters(url):
-#     # cityCodes = []
-#     # with open("/src/cities.json", 'r') as f:
-#     #     cityCodes = json.load(f)["cities"]
-#     #     f.close()
-#     # cityCodes = os.environ.get("CITIES")
-#     # apiKey = os.environ.get("OPEN_WEATHER_APIKEY")
-#     i = 0
-#     # for item in cityCodes:
-#     #     item = 'item'
-#     #     if i == (len(cityCodes) - 1):
-#     #         url = url + item
-#     #     elif len(cityCodes) == 1:
-#     #         url = url + item
-#     #     else:
-#     #         url = url + item + ','
-#     #     i = i + 1
-            
-#     if len(cityCodes) > 0:
-#         url + "&APPID=" + apiKey
-#     else:
-#         url + "APPID=" + apiKey
-#     print(url)
-#     return url

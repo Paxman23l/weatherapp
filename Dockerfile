@@ -2,7 +2,9 @@ FROM balenalib/raspberrypi3-python:3.5.7-stretch-run
 
 ## INSTALL UPDATES AND REQUIRED PACKAGES
 RUN apt-get update && apt-get -y upgrade && \
-	apt-get install -y --no-install-recommends libc-bin qt4-default libopenjp2-7 libssl-dev libffi-dev build-essential zlib1g-dev libjpeg-dev git wget
+	apt-get install -y --no-install-recommends libc-bin qt4-default \
+	libopenjp2-7 libssl-dev libffi-dev build-essential zlib1g-dev \
+	libjpeg-dev git wget
 
 ## PIP UPGRADE AND INSTALL
 RUN pip3 install --upgrade pip
