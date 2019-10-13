@@ -26,25 +26,32 @@ def _getOSVariables():
     print(EXTERNAL_WEATHER_DATABASE)
 
 _getOSVariables()
-print("Creating db connection")
-client = CouchDB("admin", "password", url="http://10.0.0.19:5984", connect=True)
-print("Db connection Created")
+#print("Creating db connection")
+#client = CouchDB("admin", "password", url="http://10.0.0.19:5984", connect=True)
+#print("Db connection Created")
 
 def addInternalWeather(date_time, temp_c):
-    db = client.create_database(INTERNAL_WEATHER_DATABASE)
+    print("Saving internal weather")
+    client = CouchDB("admin", "password", url="http://10.0.0.19:5984", connect=True)
+    db = client.create_database("internalweather")
     data = {}
-    data.temp = temp_c
-    data.format = "C"
-    doc = db.create_document(date_time.strftime("%Y-%m-%dT%H:%M:%S"), data)
+    # data[date_time.strftime("%Y-%m-%dT%H:%M:%S")]
+    data["temp"] = str(temp_c)
+    data["format"] = "C"
+    data["datetime"] = date_time.strftime("%Y-%m-%dT%H:%M:%S")
+    doc = db.create_document(data)
+    
     doc.save()
 
 def addExternalWeather(date_time, city, temp_c):
-    db = client.create_database(EXTERNAL_WEATHER_DATABASE)
+    print("Saving external weather")
+    client = CouchDB("admin", "password", url="http://10.0.0.19:5984", connect=True)
+    db = client.create_database("externalweather")
     data = {}
-    data.temp = temp_c
-    data.format = "C"
-    data.city = city
-    doc = db.create_document(date_time.strftime("%Y-%m-%dT%H:%M:%S"), data)
+    data["temp"] = str(temp_c)
+    data["format"] = "C"
+    data["city"] = str(city)
+    doc = db.create_document(data)
     doc.save()
 
 #def _getOSVariables():

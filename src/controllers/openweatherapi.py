@@ -32,6 +32,7 @@ def openWeatherApiCall(ENABLE_STORAGE):
                 print(item['name'] + ": " + str(round(item['main']['temp'], 1)) + "C")
                 model = DisplayModel(item['name'] + ": " + str(round(item['main']['temp'], 1)) + "C", .05, [255,255,255],background)
                 msg.append(model)
+                print("ENABLE_STORAGE:  " + str(ENABLE_STORAGE))
                 if ENABLE_STORAGE:
                         addExternalWeather(datetime.datetime.now(), item['name'], str(round(item['main']['temp'], 1)))
             return msg

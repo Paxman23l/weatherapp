@@ -44,7 +44,7 @@ def runInsideWeather(q):
                     # queue.put(WeatherModelDisplay(temp_f, TempFormat.F, .05, [255,255,255], background_color, "Inside Temp"))
                     q.put(DisplayModel("Inside: " + str(round(temp_f, 1)) + TempFormat.F.name, .05, [255,255,255], background_color))    
                 # add internal weather data to database
-                if ENABLE_STORAGE:
+                if True:
                     addInternalWeather(datetime.datetime.now(), temp_c)
             except Exception as e:
                 print("An exception occured")
@@ -57,7 +57,7 @@ def runOutsideWeather(q):
     while True:
         if q.full() != True:
             try:
-                result = openWeatherApiCall(ENABLE_STORAGE)
+                result = openWeatherApiCall(True)
                 for item in result:
                     q.put(item)
             except Exception as e:
@@ -79,9 +79,10 @@ def _loadSettings():
     timeOut = os.environ.get("QUERY_TIMEOUT")
     if timeOut is not None:
         TIME_OUT = timeOut
-    enableStorage = os.environ.get("ENABLE_STORAGE")
-    if enableStorage is not None:
-        ENABLE_STORAGE = enableStorage
+    ENABLE_STORAGE = os.environ.get("ENABLE_STORAGE")
+    #print(enableStorage)
+    #if enableStorage is not None:
+    #    ENABLE_STORAGE = enableStorage
 
 def main():
     setLowLight()
