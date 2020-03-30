@@ -42,6 +42,7 @@ def addInternalWeather(date_time, temp_c):
     doc = db.create_document(data)
     
     doc.save()
+    client.disconnect()
 
 def addExternalWeather(date_time, city, temp_c):
     print("Saving external weather")
@@ -53,6 +54,7 @@ def addExternalWeather(date_time, city, temp_c):
     data["city"] = str(city)
     doc = db.create_document(data)
     doc.save()
+    client.disconnect()
 
 #def _getOSVariables():
 #    USERNAME = os.environ.get("COUCHDB_USERNAME")
